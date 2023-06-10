@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_hub_flow">
+    <sys_hub_flow action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from>dcdb7f495b630010d17e6f643381c77d</copied_from>
+        <copied_from_name>Azure DevOps Discover Pipelines</copied_from_name>
+        <description>Discover subflow for azure pipeline discovery</description>
+        <internal_name>tool_discover_pipelines</internal_name>
+        <label_cache>[{"name":"d5ea3a03-1d40-4504-835a-f6a9438867a1.importrequeststate","label":"2 - Azure DevOps Discover Release Pipelines➛importrequeststate","reference_display":"importrequeststate","type":"choice","base_type":"choice","choices":[{"label":"Requested","value":"requested","order":0.0},{"label":"Processing","value":"processing","order":1.0},{"label":"Completed","value":"completed","order":2.0},{"label":"Error","value":"error","order":3.0},{"label":"Paused","value":"paused","order":4.0},{"label":"Canceled","value":"canceled","order":5.0},{"label":"Unmatched","value":"unmatched","order":6.0},{"label":"Created","value":"created","order":7.0},{"label":"Waiting","value":"waiting","order":8.0}],"attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ad19f610-725d-4a3b-8ab4-3cffc667c75f"}},{"name":"a5fe4f1c-b917-4e53-a24d-d9e140294323.table_name","label":"1 - Update Record➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"a5fe4f1c-b917-4e53-a24d-d9e140294323.record","label":"1 - Update Record➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"dad2ce3c-d13b-4b9b-bc06-a49f8700cc46.table_name","label":"3 - Update Record➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"dad2ce3c-d13b-4b9b-bc06-a49f8700cc46.record","label":"3 - Update Record➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"subflow.current","label":"Input➛current","reference":"sn_devops_tool","reference_display":"DevOps Tool","type":"reference","base_type":"reference","column_name":""},{"name":"8756579c-51fc-4e45-ab43-b49af4741e28.Table","label":"1 - Look Up Record➛Import Request Table","reference":"sn_devops_import_request","reference_display":"Import Request","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"8756579c-51fc-4e45-ab43-b49af4741e28.Record","label":"1 - Look Up Record➛Import Request Record","reference":"sn_devops_import_request","reference_display":"Import Request","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"subflow.current.release_connection_alias.sys_id","label":"Input➛current➛Release connection alias➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"sys_alias","column_name":"sys_id"},{"name":"d5ea3a03-1d40-4504-835a-f6a9438867a1.discoverpayload","label":"2 - Azure DevOps Discover Release Pipelines➛discoverpayload","reference_display":"discoverpayload","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7a6bc0a3-c2ba-494d-ac5b-7a411cbcbe1e"}},{"name":"subflow.current.release_connection_alias","label":"Input➛current➛Release connection alias","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"reference","base_type":"reference","parent_table_name":"sn_devops_tool","column_name":"release_connection_alias"},{"name":"93165c9f-c059-4bb2-adfd-ff622f3dec87.Table","label":"2➛Table","reference_display":"Table","type":"table_name","base_type":"table_name"},{"name":"93165c9f-c059-4bb2-adfd-ff622f3dec87.Record","label":"2➛Record","reference_display":"Record","type":"document_id","base_type":"document_id"},{"name":"55467028-9599-426f-9ccf-75f0c95b5ba8.Record.credential","label":"1➛HTTP(s) Connection Record➛Credential","reference":"discovery_credentials","reference_display":"Credentials","type":"reference","base_type":"reference","parent_table_name":"http_connection","column_name":"credential"},{"name":"subflow.current.sys_id","label":"Input➛current➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"sn_devops_tool","column_name":"sys_id"},{"name":"55467028-9599-426f-9ccf-75f0c95b5ba8.Table","label":"1➛HTTP(s) Connection Table","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"table_name","base_type":"table_name"},{"name":"55467028-9599-426f-9ccf-75f0c95b5ba8.Record","label":"1➛HTTP(s) Connection Record","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"reference","base_type":"reference"},{"name":"37747d61-b83b-46e0-9009-338561ad23a6.sysid","label":"1.1➛sysid","reference_display":"sysid","type":"string","base_type":"string"},{"name":"subflow.current.connection_alias.sys_id","label":"Input➛current➛Connection alias➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"sys_alias","column_name":"sys_id"},{"name":"3b4d85a7-582b-406e-9feb-6f8c97a1e077.table_name","label":"2.2➛Table","reference_display":"Table","type":"table_name","base_type":"table_name"},{"name":"3b4d85a7-582b-406e-9feb-6f8c97a1e077.record","label":"2.2➛Record","reference_display":"Record","type":"document_id","base_type":"document_id"},{"name":"subflow.current.connection_alias.id","label":"Input➛current➛Connection alias➛ID","reference":"","reference_display":"ID","type":"string","base_type":"string","parent_table_name":"sys_alias","column_name":"id"},{"name":"subflow.current.connection_alias.name","label":"Input➛current➛Connection alias➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"sys_alias","column_name":"name"},{"name":"5da395c4-9378-4932-81e5-0763388b2d0c.table_name","label":"2.1➛Connection \u0026 Credential Aliases Table","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"table_name","base_type":"table_name"},{"name":"5da395c4-9378-4932-81e5-0763388b2d0c.record","label":"2.1➛Connection \u0026 Credential Aliases Record","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"reference","base_type":"reference"},{"name":"baaa14ce-6743-4938-9d7e-17380675da34.Record.credential.tag","label":"1➛HTTP(s) Connection Record➛Credential➛Credential alias","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"glide_list","base_type":"glide_list","parent_table_name":"discovery_credentials","column_name":"tag"},{"name":"baaa14ce-6743-4938-9d7e-17380675da34.Record.credential","label":"1➛HTTP(s) Connection Record➛Credential","reference":"discovery_credentials","reference_display":"Credentials","type":"reference","base_type":"reference","parent_table_name":"http_connection","column_name":"credential"},{"name":"baaa14ce-6743-4938-9d7e-17380675da34.Table","label":"1➛HTTP(s) Connection Table","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"table_name","base_type":"table_name"},{"name":"baaa14ce-6743-4938-9d7e-17380675da34.Record","label":"1➛HTTP(s) Connection Record","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"reference","base_type":"reference"},{"name":"ad19e7dd-4caf-4ef1-93a7-4bdc3f387e39.discoverpayload","label":"1➛discoverpayload","type":"string","base_type":"string"},{"name":"d6c5ef01-b03c-42f1-920b-103a2b8f45d2.discoverpayload","label":"1 - Azure DevOps Discover Pipelines➛discoverpayload","reference_display":"discoverpayload","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"4c0411ed-435a-4857-8a5e-96dd904e5013"}},{"name":"subflow.current.connection_alias","label":"Input➛current➛Connection alias","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"reference","base_type":"reference","parent_table_name":"sn_devops_tool","column_name":"connection_alias"},{"name":"subflow.current.tool_integration.integration_version","label":"Input➛current➛Tool➛Integration version","reference":"","reference_display":"Integration version","type":"string","base_type":"string","parent_table_name":"sn_devops_tool_integration","column_name":"integration_version"},{"name":"subflow.current.tool_url","label":"Input➛current➛Tool URL","reference":"","reference_display":"Tool URL","type":"url","base_type":"url","parent_table_name":"sn_devops_tool","column_name":"tool_url"},{"name":"85a4373d-233e-4fb7-9686-bf861c7ab6bb.Record","label":"3➛HTTP(s) Connection Record","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"reference","base_type":"reference"},{"name":"85a4373d-233e-4fb7-9686-bf861c7ab6bb.Table","label":"3➛HTTP(s) Connection Table","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"table_name","base_type":"table_name"},{"name":"85a4373d-233e-4fb7-9686-bf861c7ab6bb.Record.credential","label":"3➛HTTP(s) Connection Record➛Credential","reference":"discovery_credentials","reference_display":"Credentials","type":"reference","base_type":"reference","parent_table_name":"http_connection","column_name":"credential"},{"name":"753a9524-d434-4375-b21a-1f5182e9c5bb.record","label":"2.2➛Record","reference_display":"Record","type":"document_id","base_type":"document_id"},{"name":"753a9524-d434-4375-b21a-1f5182e9c5bb.table_name","label":"2.2➛Table","reference_display":"Table","type":"table_name","base_type":"table_name"},{"name":"32579915-2271-42db-8acb-e491dc8dd8b4.record","label":"2.2➛Credentials Record","reference":"discovery_credentials","reference_display":"Credentials","type":"reference","base_type":"reference"},{"name":"32579915-2271-42db-8acb-e491dc8dd8b4.table_name","label":"2.2➛Credentials Table","reference":"discovery_credentials","reference_display":"Credentials","type":"table_name","base_type":"table_name"},{"name":"d6c5ef01-b03c-42f1-920b-103a2b8f45d2.importrequeststate","label":"1 - Azure DevOps Discover Pipelines➛importrequeststate","reference_display":"importrequeststate","type":"choice","base_type":"choice","choices":[{"label":"Requested","value":"requested","order":0.0},{"label":"Processing","value":"processing","order":1.0},{"label":"Completed","value":"completed","order":2.0},{"label":"Error","value":"error","order":3.0},{"label":"Paused","value":"paused","order":4.0},{"label":"Canceled","value":"canceled","order":5.0},{"label":"Unmatched","value":"unmatched","order":6.0},{"label":"Created","value":"created","order":7.0},{"label":"Waiting","value":"waiting","order":8.0}],"attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"cd6ccd9d-847a-464e-a918-ac1073d943ea"}}]</label_cache>
+        <master_snapshot>744d7702971b6910b1397b2e6253af5b</master_snapshot>
+        <name>Tool Discover Pipelines</name>
+        <natlang/>
+        <outputs/>
+        <pre_compiled>false</pre_compiled>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <show_draft_actions>false</show_draft_actions>
+        <show_triggered_flows>false</show_triggered_flows>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>251dffce97d76910b1397b2e6253af5a</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Tool Discover Pipelines</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name>sys_hub_flow_251dffce97d76910b1397b2e6253af5a</sys_update_name>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow>
+    <sys_translated_text action="delete_multiple" query="documentkey=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_variable_value action="delete_multiple" query="document_key=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_251dffce97d76910b1397b2e6253af5a^id=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=251dffce97d76910b1397b2e6253af5a^sys_idNOT INe11dffce97d76910b1397b2e6253af5b"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>251dffce97d76910b1397b2e6253af5a</id>
+        <name>Tool Discover Pipelines</name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:01</sys_created_on>
+        <sys_id>e11dffce97d76910b1397b2e6253af5b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:01</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=e11dffce97d76910b1397b2e6253af5b"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=251dffce97d76910b1397b2e6253af5a^sys_idNOT IN291dffce97d76910b1397b2e6253af61"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=2811729b-d6d3-4d9b-b40c-bb283259f9df</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>sn_devops_tool</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>current</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Tool Discover Pipelines">251dffce97d76910b1397b2e6253af5a</model>
+        <model_id>251dffce97d76910b1397b2e6253af5a</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_input_251dffce97d76910b1397b2e6253af5a</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="sn_devops_tool">sn_devops_tool</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:02</sys_created_on>
+        <sys_id>291dffce97d76910b1397b2e6253af61</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:02</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=251dffce97d76910b1397b2e6253af5a^sys_idNOT INe11dffce97d76910b1397b2e6253af68"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=849679e3-23a4-4e55-986a-de8fcfc8b2e0</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>discoverpayload</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>discoverpayload</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Tool Discover Pipelines">251dffce97d76910b1397b2e6253af5a</model>
+        <model_id>251dffce97d76910b1397b2e6253af5a</model_id>
+        <model_table>sys_hub_flow</model_table>
+        <name>var__m_sys_hub_flow_output_251dffce97d76910b1397b2e6253af5a</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:02</sys_created_on>
+        <sys_id>e11dffce97d76910b1397b2e6253af68</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:02</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=251dffce97d76910b1397b2e6253af5a^sys_idNOT INe51dffce97d76910b1397b2e6253af9d"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">c98385225ba30010d17e6f643381c780</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Tool Discover Pipelines">251dffce97d76910b1397b2e6253af5a</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>1</order>
+        <outputs_assigned>discoverpayload</outputs_assigned>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:02</sys_created_on>
+        <sys_id>e51dffce97d76910b1397b2e6253af9d</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+        <ui_id>c1ee81ff-d701-4c85-ac92-c2c53d17191f</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=e51dffce97d76910b1397b2e6253af9d"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_251dffce97d76910b1397b2e6253af5a^id=e51dffce97d76910b1397b2e6253af9d"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=e51dffce97d76910b1397b2e6253af9d"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=e51dffce97d76910b1397b2e6253af9d"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_251dffce97d76910b1397b2e6253af5a^sys_idNOT INad1dffce97d76910b1397b2e6253af65"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>current</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_251dffce97d76910b1397b2e6253af5a</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:02</sys_created_on>
+        <sys_id>ad1dffce97d76910b1397b2e6253af65</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:02</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_251dffce97d76910b1397b2e6253af5a"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_251dffce97d76910b1397b2e6253af5a^sys_idNOT IN611dffce97d76910b1397b2e6253af6b"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>discoverpayload</element>
+        <help/>
+        <hint/>
+        <label>discoverpayload</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_251dffce97d76910b1397b2e6253af5a</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:02</sys_created_on>
+        <sys_id>611dffce97d76910b1397b2e6253af6b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:02</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_251dffce97d76910b1397b2e6253af5a"/>
+    <sys_flow_trigger_plan action="delete_multiple" query="plan_id=251dffce97d76910b1397b2e6253af5a"/>
+    <sys_flow_subflow_plan action="delete_multiple" query="plan_id=251dffce97d76910b1397b2e6253af5a^sys_idNOT INfc4d7702971b6910b1397b2e6253afc5"/>
+    <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
+        <plan>com.snc.process_flow.engine.ProcessPlan@173895d</plan>
+        <plan_id display_value="Tool Discover Pipelines">251dffce97d76910b1397b2e6253af5a</plan_id>
+        <snapshot>744d7702971b6910b1397b2e6253af5b</snapshot>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:48</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>fc4d7702971b6910b1397b2e6253afc5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_overrides/>
+        <sys_scope/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+    </sys_flow_subflow_plan>
+    <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <acls/>
+        <active>true</active>
+        <annotation/>
+        <callable_by_client_api>false</callable_by_client_api>
+        <category/>
+        <copied_from>dcdb7f495b630010d17e6f643381c77d</copied_from>
+        <copied_from_name/>
+        <description>Discover subflow for azure pipeline discovery</description>
+        <internal_name>tool_discover_pipelines</internal_name>
+        <label_cache>[{"name":"d5ea3a03-1d40-4504-835a-f6a9438867a1.importrequeststate","label":"2 - Azure DevOps Discover Release Pipelines➛importrequeststate","reference_display":"importrequeststate","type":"choice","base_type":"choice","choices":[{"label":"Requested","value":"requested","order":0.0},{"label":"Processing","value":"processing","order":1.0},{"label":"Completed","value":"completed","order":2.0},{"label":"Error","value":"error","order":3.0},{"label":"Paused","value":"paused","order":4.0},{"label":"Canceled","value":"canceled","order":5.0},{"label":"Unmatched","value":"unmatched","order":6.0},{"label":"Created","value":"created","order":7.0},{"label":"Waiting","value":"waiting","order":8.0}],"attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","uiUniqueId":"ad19f610-725d-4a3b-8ab4-3cffc667c75f"}},{"name":"a5fe4f1c-b917-4e53-a24d-d9e140294323.table_name","label":"1 - Update Record➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"a5fe4f1c-b917-4e53-a24d-d9e140294323.record","label":"1 - Update Record➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"dad2ce3c-d13b-4b9b-bc06-a49f8700cc46.table_name","label":"3 - Update Record➛Table","reference_display":"Table","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"dad2ce3c-d13b-4b9b-bc06-a49f8700cc46.record","label":"3 - Update Record➛Record","reference_display":"Record","type":"document_id","base_type":"document_id","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"subflow.current","label":"Input➛current","reference":"sn_devops_tool","reference_display":"DevOps Tool","type":"reference","base_type":"reference","column_name":""},{"name":"8756579c-51fc-4e45-ab43-b49af4741e28.Table","label":"1 - Look Up Record➛Import Request Table","reference":"sn_devops_import_request","reference_display":"Import Request","type":"table_name","base_type":"table_name","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"8756579c-51fc-4e45-ab43-b49af4741e28.Record","label":"1 - Look Up Record➛Import Request Record","reference":"sn_devops_import_request","reference_display":"Import Request","type":"reference","base_type":"reference","attributes":{"element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper"}},{"name":"subflow.current.release_connection_alias.sys_id","label":"Input➛current➛Release connection alias➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"sys_alias","column_name":"sys_id"},{"name":"d5ea3a03-1d40-4504-835a-f6a9438867a1.discoverpayload","label":"2 - Azure DevOps Discover Release Pipelines➛discoverpayload","reference_display":"discoverpayload","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"7a6bc0a3-c2ba-494d-ac5b-7a411cbcbe1e"}},{"name":"subflow.current.release_connection_alias","label":"Input➛current➛Release connection alias","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"reference","base_type":"reference","parent_table_name":"sn_devops_tool","column_name":"release_connection_alias"},{"name":"93165c9f-c059-4bb2-adfd-ff622f3dec87.Table","label":"2➛Table","reference_display":"Table","type":"table_name","base_type":"table_name"},{"name":"93165c9f-c059-4bb2-adfd-ff622f3dec87.Record","label":"2➛Record","reference_display":"Record","type":"document_id","base_type":"document_id"},{"name":"55467028-9599-426f-9ccf-75f0c95b5ba8.Record.credential","label":"1➛HTTP(s) Connection Record➛Credential","reference":"discovery_credentials","reference_display":"Credentials","type":"reference","base_type":"reference","parent_table_name":"http_connection","column_name":"credential"},{"name":"subflow.current.sys_id","label":"Input➛current➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"sn_devops_tool","column_name":"sys_id"},{"name":"55467028-9599-426f-9ccf-75f0c95b5ba8.Table","label":"1➛HTTP(s) Connection Table","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"table_name","base_type":"table_name"},{"name":"55467028-9599-426f-9ccf-75f0c95b5ba8.Record","label":"1➛HTTP(s) Connection Record","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"reference","base_type":"reference"},{"name":"37747d61-b83b-46e0-9009-338561ad23a6.sysid","label":"1.1➛sysid","reference_display":"sysid","type":"string","base_type":"string"},{"name":"subflow.current.connection_alias.sys_id","label":"Input➛current➛Connection alias➛Sys ID","reference":"","reference_display":"Sys ID","type":"GUID","base_type":"GUID","parent_table_name":"sys_alias","column_name":"sys_id"},{"name":"3b4d85a7-582b-406e-9feb-6f8c97a1e077.table_name","label":"2.2➛Table","reference_display":"Table","type":"table_name","base_type":"table_name"},{"name":"3b4d85a7-582b-406e-9feb-6f8c97a1e077.record","label":"2.2➛Record","reference_display":"Record","type":"document_id","base_type":"document_id"},{"name":"subflow.current.connection_alias.id","label":"Input➛current➛Connection alias➛ID","reference":"","reference_display":"ID","type":"string","base_type":"string","parent_table_name":"sys_alias","column_name":"id"},{"name":"subflow.current.connection_alias.name","label":"Input➛current➛Connection alias➛Name","reference":"","reference_display":"Name","type":"string","base_type":"string","parent_table_name":"sys_alias","column_name":"name"},{"name":"5da395c4-9378-4932-81e5-0763388b2d0c.table_name","label":"2.1➛Connection \u0026 Credential Aliases Table","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"table_name","base_type":"table_name"},{"name":"5da395c4-9378-4932-81e5-0763388b2d0c.record","label":"2.1➛Connection \u0026 Credential Aliases Record","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"reference","base_type":"reference"},{"name":"baaa14ce-6743-4938-9d7e-17380675da34.Record.credential.tag","label":"1➛HTTP(s) Connection Record➛Credential➛Credential alias","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"glide_list","base_type":"glide_list","parent_table_name":"discovery_credentials","column_name":"tag"},{"name":"baaa14ce-6743-4938-9d7e-17380675da34.Record.credential","label":"1➛HTTP(s) Connection Record➛Credential","reference":"discovery_credentials","reference_display":"Credentials","type":"reference","base_type":"reference","parent_table_name":"http_connection","column_name":"credential"},{"name":"baaa14ce-6743-4938-9d7e-17380675da34.Table","label":"1➛HTTP(s) Connection Table","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"table_name","base_type":"table_name"},{"name":"baaa14ce-6743-4938-9d7e-17380675da34.Record","label":"1➛HTTP(s) Connection Record","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"reference","base_type":"reference"},{"name":"ad19e7dd-4caf-4ef1-93a7-4bdc3f387e39.discoverpayload","label":"1➛discoverpayload","type":"string","base_type":"string"},{"name":"d6c5ef01-b03c-42f1-920b-103a2b8f45d2.discoverpayload","label":"1 - Azure DevOps Discover Pipelines➛discoverpayload","reference_display":"discoverpayload","type":"string","base_type":"string","attributes":{"uiType":"string","uiTypeLabel":"String","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"4c0411ed-435a-4857-8a5e-96dd904e5013"}},{"name":"subflow.current.connection_alias","label":"Input➛current➛Connection alias","reference":"sys_alias","reference_display":"Connection \u0026 Credential Aliases","type":"reference","base_type":"reference","parent_table_name":"sn_devops_tool","column_name":"connection_alias"},{"name":"subflow.current.tool_integration.integration_version","label":"Input➛current➛Tool➛Integration version","reference":"","reference_display":"Integration version","type":"string","base_type":"string","parent_table_name":"sn_devops_tool_integration","column_name":"integration_version"},{"name":"subflow.current.tool_url","label":"Input➛current➛Tool URL","reference":"","reference_display":"Tool URL","type":"url","base_type":"url","parent_table_name":"sn_devops_tool","column_name":"tool_url"},{"name":"85a4373d-233e-4fb7-9686-bf861c7ab6bb.Record","label":"3➛HTTP(s) Connection Record","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"reference","base_type":"reference"},{"name":"85a4373d-233e-4fb7-9686-bf861c7ab6bb.Table","label":"3➛HTTP(s) Connection Table","reference":"http_connection","reference_display":"HTTP(s) Connection","type":"table_name","base_type":"table_name"},{"name":"85a4373d-233e-4fb7-9686-bf861c7ab6bb.Record.credential","label":"3➛HTTP(s) Connection Record➛Credential","reference":"discovery_credentials","reference_display":"Credentials","type":"reference","base_type":"reference","parent_table_name":"http_connection","column_name":"credential"},{"name":"753a9524-d434-4375-b21a-1f5182e9c5bb.record","label":"2.2➛Record","reference_display":"Record","type":"document_id","base_type":"document_id"},{"name":"753a9524-d434-4375-b21a-1f5182e9c5bb.table_name","label":"2.2➛Table","reference_display":"Table","type":"table_name","base_type":"table_name"},{"name":"32579915-2271-42db-8acb-e491dc8dd8b4.record","label":"2.2➛Credentials Record","reference":"discovery_credentials","reference_display":"Credentials","type":"reference","base_type":"reference"},{"name":"32579915-2271-42db-8acb-e491dc8dd8b4.table_name","label":"2.2➛Credentials Table","reference":"discovery_credentials","reference_display":"Credentials","type":"table_name","base_type":"table_name"},{"name":"d6c5ef01-b03c-42f1-920b-103a2b8f45d2.importrequeststate","label":"1 - Azure DevOps Discover Pipelines➛importrequeststate","reference_display":"importrequeststate","type":"choice","base_type":"choice","choices":[{"label":"Requested","value":"requested","order":0.0},{"label":"Processing","value":"processing","order":1.0},{"label":"Completed","value":"completed","order":2.0},{"label":"Error","value":"error","order":3.0},{"label":"Paused","value":"paused","order":4.0},{"label":"Canceled","value":"canceled","order":5.0},{"label":"Unmatched","value":"unmatched","order":6.0},{"label":"Created","value":"created","order":7.0},{"label":"Waiting","value":"waiting","order":8.0}],"attributes":{"uiType":"choice","uiTypeLabel":"Choice","element_mapping_provider":"com.glide.flow_design.action.data.FlowDesignVariableMapper","pwd2droppable":"true","uiUniqueId":"cd6ccd9d-847a-464e-a918-ac1073d943ea"}}]</label_cache>
+        <master>true</master>
+        <name>Tool Discover Pipelines</name>
+        <natlang/>
+        <outputs/>
+        <parent_flow display_value="Tool Discover Pipelines">251dffce97d76910b1397b2e6253af5a</parent_flow>
+        <remote_trigger_id/>
+        <run_as>user</run_as>
+        <run_with_roles/>
+        <sc_callable>false</sc_callable>
+        <status>published</status>
+        <sys_class_name>sys_hub_flow_snapshot</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:48</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>744d7702971b6910b1397b2e6253af5b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_overrides/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+        <type>subflow</type>
+    </sys_hub_flow_snapshot>
+    <sys_translated_text action="delete_multiple" query="documentkey=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_variable_value action="delete_multiple" query="document_key=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_744d7702971b6910b1397b2e6253af5b^id=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_hub_trigger_instance action="delete_multiple" query="flow=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_hub_flow_stage action="delete_multiple" query="flow=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_flow_cat_variable_model action="delete_multiple" query="id=744d7702971b6910b1397b2e6253af5b^sys_idNOT INb44d7702971b6910b1397b2e6253af5c"/>
+    <sys_flow_cat_variable_model action="INSERT_OR_UPDATE">
+        <id>744d7702971b6910b1397b2e6253af5b</id>
+        <name>Tool Discover Pipelines</name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:48</sys_created_on>
+        <sys_id>b44d7702971b6910b1397b2e6253af5c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+    </sys_flow_cat_variable_model>
+    <sys_flow_cat_variable action="delete_multiple" query="flow_catalog_model=b44d7702971b6910b1397b2e6253af5c"/>
+    <sys_hub_flow_input action="delete_multiple" query="model=744d7702971b6910b1397b2e6253af5b^sys_idNOT INf44d7702971b6910b1397b2e6253af5d"/>
+    <sys_hub_flow_input action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=reference,uiTypeLabel=Reference,uiUniqueId=2811729b-d6d3-4d9b-b40c-bb283259f9df</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table>sn_devops_tool</choice_table>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>current</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="Reference">reference</internal_type>
+        <label>current</label>
+        <mandatory>true</mandatory>
+        <max_length>32</max_length>
+        <model display_value="Tool Discover Pipelines">744d7702971b6910b1397b2e6253af5b</model>
+        <model_id>744d7702971b6910b1397b2e6253af5b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_input_744d7702971b6910b1397b2e6253af5b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference display_value="" name="sn_devops_tool">sn_devops_tool</reference>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_input</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:48</sys_created_on>
+        <sys_id>f44d7702971b6910b1397b2e6253af5d</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_input>
+    <sys_hub_flow_output action="delete_multiple" query="model=744d7702971b6910b1397b2e6253af5b^sys_idNOT INf84d7702971b6910b1397b2e6253afb3"/>
+    <sys_hub_flow_output action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <array>false</array>
+        <array_denormalized>false</array_denormalized>
+        <attributes>element_mapping_provider=com.glide.flow_design.action.data.FlowDesignVariableMapper,uiType=string,uiTypeLabel=String,uiUniqueId=849679e3-23a4-4e55-986a-de8fcfc8b2e0</attributes>
+        <audit>false</audit>
+        <calculation><![CDATA[(function calculatedFieldValue(current) {
+
+	// Add your code here
+	return '';  // return the calculated value
+
+})(current);]]></calculation>
+        <choice/>
+        <choice_field/>
+        <choice_table/>
+        <column_label/>
+        <comments/>
+        <create_roles/>
+        <default_value/>
+        <defaultsort/>
+        <delete_roles/>
+        <dependent/>
+        <dependent_on_field/>
+        <display>false</display>
+        <dynamic_creation>false</dynamic_creation>
+        <dynamic_creation_script/>
+        <dynamic_default_value/>
+        <dynamic_ref_qual/>
+        <element>discoverpayload</element>
+        <element_reference>false</element_reference>
+        <foreign_database/>
+        <formula/>
+        <function_definition/>
+        <function_field>false</function_field>
+        <help/>
+        <hint/>
+        <internal_type display_value="String">string</internal_type>
+        <label>discoverpayload</label>
+        <mandatory>false</mandatory>
+        <max_length>8000</max_length>
+        <model display_value="Tool Discover Pipelines">744d7702971b6910b1397b2e6253af5b</model>
+        <model_id>744d7702971b6910b1397b2e6253af5b</model_id>
+        <model_table>sys_hub_flow_snapshot</model_table>
+        <name>var__m_sys_hub_flow_output_744d7702971b6910b1397b2e6253af5b</name>
+        <next_element/>
+        <order>1</order>
+        <primary>false</primary>
+        <read_only>false</read_only>
+        <read_roles/>
+        <reference/>
+        <reference_cascade_rule/>
+        <reference_floats>false</reference_floats>
+        <reference_key/>
+        <reference_qual/>
+        <reference_qual_condition/>
+        <reference_type/>
+        <sizeclass/>
+        <spell_check>false</spell_check>
+        <staged>false</staged>
+        <sys_class_name>sys_hub_flow_output</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:48</sys_created_on>
+        <sys_id>f84d7702971b6910b1397b2e6253afb3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package/>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+        <table_reference>false</table_reference>
+        <text_index>false</text_index>
+        <unique>false</unique>
+        <use_dependent_field>false</use_dependent_field>
+        <use_dynamic_default>false</use_dynamic_default>
+        <use_reference_qualifier>simple</use_reference_qualifier>
+        <virtual>false</virtual>
+        <virtual_type>script</virtual_type>
+        <widget/>
+        <write_roles/>
+        <xml_view>false</xml_view>
+    </sys_hub_flow_output>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_hub_sub_flow_instance action="delete_multiple" query="flow=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_hub_flow_logic action="delete_multiple" query="flow=744d7702971b6910b1397b2e6253af5b^sys_idNOT IN344d7702971b6910b1397b2e6253afbe"/>
+    <sys_hub_flow_logic action="INSERT_OR_UPDATE">
+        <block display_value="">c98385225ba30010d17e6f643381c780</block>
+        <comment/>
+        <connected_to/>
+        <decision_table/>
+        <decision_table_inputs/>
+        <display_text/>
+        <extended_inputs/>
+        <flow display_value="Tool Discover Pipelines">744d7702971b6910b1397b2e6253af5b</flow>
+        <flow_variable/>
+        <flow_variables_assigned/>
+        <inputs/>
+        <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
+        <order>1</order>
+        <outputs_assigned>discoverpayload</outputs_assigned>
+        <outputs_to_assign/>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_flow_logic</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:48</sys_created_on>
+        <sys_id>344d7702971b6910b1397b2e6253afbe</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_scope/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+        <ui_id>c1ee81ff-d701-4c85-ac92-c2c53d17191f</ui_id>
+        <workflow_inputs/>
+        <workflow_reference/>
+    </sys_hub_flow_logic>
+    <sys_variable_value action="delete_multiple" query="document_key=344d7702971b6910b1397b2e6253afbe"/>
+    <sys_element_mapping action="delete_multiple" query="table=var__m_sys_hub_flow_output_744d7702971b6910b1397b2e6253af5b^id=344d7702971b6910b1397b2e6253afbe"/>
+    <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=344d7702971b6910b1397b2e6253afbe"/>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=344d7702971b6910b1397b2e6253afbe"/>
+    <sys_hub_pill_compound action="delete_multiple" query="attached_to=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_hub_flow_variable action="delete_multiple" query="model=744d7702971b6910b1397b2e6253af5b"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_input_744d7702971b6910b1397b2e6253af5b^sys_idNOT IN3c4d7702971b6910b1397b2e6253afae"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>current</element>
+        <help/>
+        <hint/>
+        <label>current</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_input_744d7702971b6910b1397b2e6253af5b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:48</sys_created_on>
+        <sys_id>3c4d7702971b6910b1397b2e6253afae</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_input_744d7702971b6910b1397b2e6253af5b"/>
+    <sys_documentation action="delete_multiple" query="name=var__m_sys_hub_flow_output_744d7702971b6910b1397b2e6253af5b^sys_idNOT IN384d7702971b6910b1397b2e6253afb8"/>
+    <sys_documentation action="INSERT_OR_UPDATE">
+        <element>discoverpayload</element>
+        <help/>
+        <hint/>
+        <label>discoverpayload</label>
+        <language>en</language>
+        <name>var__m_sys_hub_flow_output_744d7702971b6910b1397b2e6253af5b</name>
+        <plural/>
+        <sys_class_name>sys_documentation</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:03:48</sys_created_on>
+        <sys_id>384d7702971b6910b1397b2e6253afb8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name/>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:03:48</sys_updated_on>
+        <url/>
+        <url_target/>
+    </sys_documentation>
+    <sys_choice action="delete_multiple" query="name=var__m_sys_hub_flow_output_744d7702971b6910b1397b2e6253af5b"/>
+    <sys_hub_flow action="UPDATE">
+        <sys_id>251dffce97d76910b1397b2e6253af5a</sys_id>
+        <latest_snapshot>744d7702971b6910b1397b2e6253af5b</latest_snapshot>
+        <compiler_build>glide-tokyo-07-08-2022__patch7b-04-20-2023_05-15-2023_1941.zip</compiler_build>
+    </sys_hub_flow>
+</record_update>

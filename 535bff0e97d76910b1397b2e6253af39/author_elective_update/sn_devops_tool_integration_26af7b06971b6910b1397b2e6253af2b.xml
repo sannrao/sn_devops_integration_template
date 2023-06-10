@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_devops_tool_integration">
+    <sn_devops_tool_integration action="DELETE">
+        <active>true</active>
+        <api_manager/>
+        <bulk_processing_capability/>
+        <integration_handler_name/>
+        <integration_version>v1</integration_version>
+        <seeded>false</seeded>
+        <sys_class_name>sn_devops_tool_integration</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:14:54</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>26af7b06971b6910b1397b2e6253af2b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>DevOps Tool Template</sys_name>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name>sn_devops_tool_integration_26af7b06971b6910b1397b2e6253af2b</sys_update_name>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:14:54</sys_updated_on>
+        <tool>sn_devops_tool</tool>
+        <tool_label>DevOps Tool Template</tool_label>
+        <tool_logo/>
+        <tool_name>x_snc_sn_devops_in_DevOps_Tool_Template</tool_name>
+        <use_packageable_integrations>true</use_packageable_integrations>
+    </sn_devops_tool_integration>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</application>
+        <file_path/>
+        <instance_id>4faadaf3db7d19103050ac44d496194e</instance_id>
+        <instance_name>empsnagaraja1</instance_name>
+        <name>sn_devops_tool_integration_26af7b06971b6910b1397b2e6253af2b</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sn_devops_tool_integration"><sn_devops_tool_integration action="INSERT_OR_UPDATE"><active>true</active><api_manager/><bulk_processing_capability/><integration_handler_name/><integration_version>v1</integration_version><seeded>false</seeded><sys_class_name>sn_devops_tool_integration</sys_class_name><sys_created_by>santosh.nagaraja@snc</sys_created_by><sys_created_on>2023-06-10 01:14:54</sys_created_on><sys_domain>global</sys_domain><sys_id>26af7b06971b6910b1397b2e6253af2b</sys_id><sys_mod_count>0</sys_mod_count><sys_name>DevOps Tool Template</sys_name><sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package><sys_policy/><sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope><sys_update_name>sn_devops_tool_integration_26af7b06971b6910b1397b2e6253af2b</sys_update_name><sys_updated_by>santosh.nagaraja@snc</sys_updated_by><sys_updated_on>2023-06-10 01:14:54</sys_updated_on><tool>sn_devops_tool</tool><tool_label>DevOps Tool Template</tool_label><tool_logo/><tool_name>x_snc_sn_devops_in_DevOps_Tool_Template</tool_name><use_packageable_integrations>true</use_packageable_integrations></sn_devops_tool_integration></record_update>]]></payload>
+        <payload_hash>-1271345355</payload_hash>
+        <record_name>DevOps Tool Template</record_name>
+        <reverted_from/>
+        <source>df5bff0e97d76910b1397b2e6253af3a</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:14:55</sys_created_on>
+        <sys_id>2fcff706971b6910b1397b2e6253af23</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>188a2dede9f0000001</sys_recorded_at>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:14:55</sys_updated_on>
+        <type>DevOps Tool Integration</type>
+        <update_guid>27cff706531b6910eeb5a53129cc9e23</update_guid>
+        <update_guid_history>27cff706531b6910eeb5a53129cc9e23:-1271345355</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete display_value="DevOps Tool Template">96efbf06971b6910b1397b2e6253af4f</sys_audit_delete>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-10 01:15:22</sys_created_on>
+        <sys_db_object display_value="" name="sn_devops_tool_integration">sn_devops_tool_integration</sys_db_object>
+        <sys_id>950609fc9ca14066aa7c9d73a5d81da9</sys_id>
+        <sys_metadata>26af7b06971b6910b1397b2e6253af2b</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>DevOps Tool Template</sys_name>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_scope_delete display_value="">69105f2e801f4f25b380b6d9de82d189</sys_scope_delete>
+        <sys_update_name>sn_devops_tool_integration_26af7b06971b6910b1397b2e6253af2b</sys_update_name>
+        <sys_update_version display_value="sn_devops_tool_integration_26af7b06971b6910b1397b2e6253af2b">2fcff706971b6910b1397b2e6253af23</sys_update_version>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-10 01:15:22</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
