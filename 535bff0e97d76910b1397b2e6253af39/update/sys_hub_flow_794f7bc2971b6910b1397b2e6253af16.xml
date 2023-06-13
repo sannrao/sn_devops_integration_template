@@ -29,7 +29,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>794f7bc2971b6910b1397b2e6253af16</sys_id>
-        <sys_mod_count>15</sys_mod_count>
+        <sys_mod_count>21</sys_mod_count>
         <sys_name>Tool Orchestration Inbound Notification</sys_name>
         <sys_overrides/>
         <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
@@ -37,7 +37,7 @@
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_update_name>sys_hub_flow_794f7bc2971b6910b1397b2e6253af16</sys_update_name>
         <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
-        <sys_updated_on>2023-06-12 05:28:48</sys_updated_on>
+        <sys_updated_on>2023-06-13 21:21:14</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow>
     <sys_translated_text action="delete_multiple" query="documentkey=794f7bc2971b6910b1397b2e6253af16"/>
@@ -227,7 +227,81 @@
         <xml_view>false</xml_view>
     </sys_hub_flow_output>
     <sys_hub_alias_mapping action="delete_multiple" query="source_id=794f7bc2971b6910b1397b2e6253af16"/>
-    <sys_hub_action_instance action="delete_multiple" query="flow=794f7bc2971b6910b1397b2e6253af16"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=794f7bc2971b6910b1397b2e6253af16^sys_idNOT IN42a07b53c3d3ad504395388f05013197"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent/>
+        <comment/>
+        <display_text/>
+        <flow display_value="Tool Orchestration Inbound Notification">794f7bc2971b6910b1397b2e6253af16</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:08</sys_created_on>
+        <sys_id>42a07b53c3d3ad504395388f05013197</sys_id>
+        <sys_mod_count>8</sys_mod_count>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_updated_by>devops.system</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:58</sys_updated_on>
+        <ui_id>00ba7d19-d9c9-4016-b004-0d31633fa76b</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=42a07b53c3d3ad504395388f05013197"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>42a07b53c3d3ad504395388f05013197</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:08</sys_created_on>
+        <sys_id>0ea07b53c3d3ad504395388f05013199</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:08</sys_updated_on>
+        <value>sn_devops_inbound_event</value>
+        <variable display_value="Table">b5d01916c31332002841b63b12d3aec9</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=42a07b53c3d3ad504395388f05013197"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>record</field>
+        <id>42a07b53c3d3ad504395388f05013197</id>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:08</sys_created_on>
+        <sys_id>8aa07b53c3d3ad504395388f05013199</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:08</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value>{{subflow.current}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>42a07b53c3d3ad504395388f05013197</id>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:08</sys_created_on>
+        <sys_id>02a07b53c3d3ad504395388f05013199</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:08</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>values</field>
+        <id>42a07b53c3d3ad504395388f05013197</id>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:08</sys_created_on>
+        <sys_id>c6a07b53c3d3ad504395388f05013199</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:08</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value>transformed_payload={{subflow.current.original_payload}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=42a07b53c3d3ad504395388f05013197"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=42a07b53c3d3ad504395388f05013197"/>
     <sys_hub_sub_flow_instance action="delete_multiple" query="flow=794f7bc2971b6910b1397b2e6253af16"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=794f7bc2971b6910b1397b2e6253af16^sys_idNOT IN924f7bc2971b6910b1397b2e6253af79"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
@@ -243,7 +317,7 @@
         <flow_variables_assigned/>
         <inputs/>
         <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
-        <order>1</order>
+        <order>2</order>
         <outputs_assigned>transformedpayload</outputs_assigned>
         <outputs_to_assign/>
         <outputs_to_assign/>
@@ -252,10 +326,10 @@
         <sys_created_by>santosh.nagaraja@snc</sys_created_by>
         <sys_created_on>2023-06-10 01:12:38</sys_created_on>
         <sys_id>924f7bc2971b6910b1397b2e6253af79</sys_id>
-        <sys_mod_count>22</sys_mod_count>
+        <sys_mod_count>29</sys_mod_count>
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
-        <sys_updated_on>2023-06-12 05:28:48</sys_updated_on>
+        <sys_updated_on>2023-06-13 21:21:14</sys_updated_on>
         <ui_id>01eacd87-c802-4b72-adb3-246e72641605</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
@@ -268,11 +342,11 @@
         <sys_created_by>santosh.nagaraja@snc</sys_created_by>
         <sys_created_on>2023-06-10 18:32:11</sys_created_on>
         <sys_id>423da7dec393a9504395388f05013188</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
-        <sys_updated_on>2023-06-12 05:09:32</sys_updated_on>
+        <sys_updated_on>2023-06-13 20:49:24</sys_updated_on>
         <table>var__m_sys_hub_flow_output_794f7bc2971b6910b1397b2e6253af16</table>
-        <value>{{6d88e672-d16d-49c8-bdba-91f20c3bd906.record.transformed_payload}}</value>
+        <value>{{subflow.current.original_payload}}</value>
     </sys_element_mapping>
     <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=924f7bc2971b6910b1397b2e6253af79"/>
     <sys_hub_input_scripts action="delete_multiple" query="instance=924f7bc2971b6910b1397b2e6253af79"/>
@@ -331,19 +405,19 @@
     <sys_flow_trigger_plan action="delete_multiple" query="plan_id=794f7bc2971b6910b1397b2e6253af16"/>
     <sys_flow_subflow_plan action="delete_multiple" query="plan_id=794f7bc2971b6910b1397b2e6253af16^sys_idNOT IN837f7306971b6910b1397b2e6253af77"/>
     <sys_flow_subflow_plan action="INSERT_OR_UPDATE">
-        <plan>com.snc.process_flow.engine.ProcessPlan@1ba4a73</plan>
+        <plan>{"persistor":{"@class":".ChunkingPlanPersistor","table":"sys_flow_subflow_plan","id":"837f7306971b6910b1397b2e6253af77","name":"plan","plan_signature":null}}</plan>
         <plan_id display_value="Tool Orchestration Inbound Notification">794f7bc2971b6910b1397b2e6253af16</plan_id>
-        <snapshot>327f3306971b6910b1397b2e6253afd9</snapshot>
+        <snapshot>8ed07f53c3d3ad504395388f050131e3</snapshot>
         <sys_created_by>santosh.nagaraja@snc</sys_created_by>
         <sys_created_on>2023-06-10 01:13:30</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>837f7306971b6910b1397b2e6253af77</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_overrides/>
         <sys_scope/>
         <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
-        <sys_updated_on>2023-06-12 05:28:48</sys_updated_on>
+        <sys_updated_on>2023-06-13 21:21:13</sys_updated_on>
     </sys_flow_subflow_plan>
     <sys_hub_flow_snapshot action="INSERT_OR_UPDATE">
         <access>public</access>
@@ -373,7 +447,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>327f3306971b6910b1397b2e6253afd9</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>7</sys_mod_count>
         <sys_name/>
         <sys_overrides/>
         <sys_package/>
@@ -381,7 +455,7 @@
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_update_name/>
         <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
-        <sys_updated_on>2023-06-12 05:28:48</sys_updated_on>
+        <sys_updated_on>2023-06-13 21:21:13</sys_updated_on>
         <type>subflow</type>
     </sys_hub_flow_snapshot>
     <sys_translated_text action="delete_multiple" query="documentkey=327f3306971b6910b1397b2e6253afd9"/>
@@ -571,7 +645,81 @@
         <xml_view>false</xml_view>
     </sys_hub_flow_output>
     <sys_hub_alias_mapping action="delete_multiple" query="source_id=327f3306971b6910b1397b2e6253afd9"/>
-    <sys_hub_action_instance action="delete_multiple" query="flow=327f3306971b6910b1397b2e6253afd9"/>
+    <sys_hub_action_instance action="delete_multiple" query="flow=327f3306971b6910b1397b2e6253afd9^sys_idNOT IN13a0bb53c3d3ad504395388f05013175"/>
+    <sys_hub_action_instance action="INSERT_OR_UPDATE">
+        <action_inputs/>
+        <action_inputs/>
+        <action_type display_value="Update Record">f9d01dd2c31332002841b63b12d3aea1</action_type>
+        <action_type_parent display_value="Update Record">baf174c8c3c232002841b63b12d3aee4</action_type_parent>
+        <comment/>
+        <display_text/>
+        <flow display_value="Tool Orchestration Inbound Notification">327f3306971b6910b1397b2e6253afd9</flow>
+        <order>1</order>
+        <parent_ui_id/>
+        <sys_class_name>sys_hub_action_instance</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:13</sys_created_on>
+        <sys_id>13a0bb53c3d3ad504395388f05013175</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:13</sys_updated_on>
+        <ui_id>00ba7d19-d9c9-4016-b004-0d31633fa76b</ui_id>
+    </sys_hub_action_instance>
+    <sys_variable_value action="delete_multiple" query="document_key=13a0bb53c3d3ad504395388f05013175"/>
+    <sys_variable_value action="INSERT_OR_UPDATE">
+        <document>sys_hub_action_instance</document>
+        <document_key>13a0bb53c3d3ad504395388f05013175</document_key>
+        <order>50</order>
+        <sys_class_name>sys_variable_value</sys_class_name>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:13</sys_created_on>
+        <sys_id>5ba0bb53c3d3ad504395388f05013176</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:13</sys_updated_on>
+        <value>sn_devops_inbound_event</value>
+        <variable display_value="Table">b5d01916c31332002841b63b12d3aec9</variable>
+    </sys_variable_value>
+    <sys_element_mapping action="delete_multiple" query="id=13a0bb53c3d3ad504395388f05013175"/>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>record</field>
+        <id>13a0bb53c3d3ad504395388f05013175</id>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:13</sys_created_on>
+        <sys_id>d7a0bb53c3d3ad504395388f05013176</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:13</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value>{{subflow.current}}</value>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>table_name</field>
+        <id>13a0bb53c3d3ad504395388f05013175</id>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:13</sys_created_on>
+        <sys_id>53a0bb53c3d3ad504395388f05013176</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:13</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value/>
+    </sys_element_mapping>
+    <sys_element_mapping action="INSERT_OR_UPDATE">
+        <field>values</field>
+        <id>13a0bb53c3d3ad504395388f05013175</id>
+        <sys_created_by>santosh.nagaraja@snc</sys_created_by>
+        <sys_created_on>2023-06-13 21:21:13</sys_created_on>
+        <sys_id>17a0bb53c3d3ad504395388f05013176</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-06-13 21:21:13</sys_updated_on>
+        <table>var__m_sys_hub_action_input_f9d01dd2c31332002841b63b12d3aea1</table>
+        <value>transformed_payload={{subflow.current.original_payload}}</value>
+    </sys_element_mapping>
+    <sys_hub_input_scripts action="delete_multiple" query="instance=13a0bb53c3d3ad504395388f05013175"/>
+    <sys_hub_alias_mapping action="delete_multiple" query="source_id=13a0bb53c3d3ad504395388f05013175"/>
     <sys_hub_sub_flow_instance action="delete_multiple" query="flow=327f3306971b6910b1397b2e6253afd9"/>
     <sys_hub_flow_logic action="delete_multiple" query="flow=327f3306971b6910b1397b2e6253afd9^sys_idNOT INc77f7306971b6910b1397b2e6253af6f"/>
     <sys_hub_flow_logic action="INSERT_OR_UPDATE">
@@ -587,7 +735,7 @@
         <flow_variables_assigned/>
         <inputs/>
         <logic_definition display_value="Assign Subflow Outputs">df4e1945c3e232002841b63b12d3ae3e</logic_definition>
-        <order>1</order>
+        <order>2</order>
         <outputs_assigned>transformedpayload</outputs_assigned>
         <outputs_to_assign/>
         <outputs_to_assign/>
@@ -596,10 +744,10 @@
         <sys_created_by>santosh.nagaraja@snc</sys_created_by>
         <sys_created_on>2023-06-10 01:13:30</sys_created_on>
         <sys_id>c77f7306971b6910b1397b2e6253af6f</sys_id>
-        <sys_mod_count>14</sys_mod_count>
+        <sys_mod_count>19</sys_mod_count>
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
-        <sys_updated_on>2023-06-12 05:28:48</sys_updated_on>
+        <sys_updated_on>2023-06-13 21:21:13</sys_updated_on>
         <ui_id>01eacd87-c802-4b72-adb3-246e72641605</ui_id>
         <workflow_inputs/>
         <workflow_reference/>
@@ -612,11 +760,11 @@
         <sys_created_by>santosh.nagaraja@snc</sys_created_by>
         <sys_created_on>2023-06-10 18:32:15</sys_created_on>
         <sys_id>833de7dec393a9504395388f05013162</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
-        <sys_updated_on>2023-06-12 05:09:39</sys_updated_on>
+        <sys_updated_on>2023-06-13 20:49:29</sys_updated_on>
         <table>var__m_sys_hub_flow_output_327f3306971b6910b1397b2e6253afd9</table>
-        <value>{{6d88e672-d16d-49c8-bdba-91f20c3bd906.record.transformed_payload}}</value>
+        <value>{{subflow.current.original_payload}}</value>
     </sys_element_mapping>
     <sys_hub_flow_logic_ext_input action="delete_multiple" query="model=c77f7306971b6910b1397b2e6253af6f"/>
     <sys_hub_input_scripts action="delete_multiple" query="instance=c77f7306971b6910b1397b2e6253af6f"/>
