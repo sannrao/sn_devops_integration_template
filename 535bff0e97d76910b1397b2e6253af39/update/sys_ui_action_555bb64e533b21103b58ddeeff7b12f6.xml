@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name>simulate</action_name>
+        <active>true</active>
+        <client>true</client>
+        <client_script_v2><![CDATA[function onClick(g_form) {
+
+}]]></client_script_v2>
+        <comments/>
+        <condition/>
+        <form_action>true</form_action>
+        <form_button>false</form_button>
+        <form_button_v2>false</form_button_v2>
+        <form_context_menu>false</form_context_menu>
+        <form_link>true</form_link>
+        <form_menu_button_v2>false</form_menu_button_v2>
+        <form_style/>
+        <format_for_configurable_workspace>false</format_for_configurable_workspace>
+        <hint/>
+        <isolate_script>true</isolate_script>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <messages/>
+        <name>Simulate</name>
+        <onclick>simulatePipeline()</onclick>
+        <order>100</order>
+        <script><![CDATA[function simulatePipeline() {
+    simulateEvents();
+	g_form.addInfoMessage("Simulation event posted");
+}
+
+function simulateEvents() {
+    var pipelineSysId = g_form.getUniqueValue();
+    var ajax = new GlideAjax('SimulateDevOps');
+    ajax.addParam('sysparm_name', 'getOrchestrationEventPayload');
+    ajax.addParam("sysparm_pipeline_sys_id", pipelineSysId);
+    ajax.getXML(simulateCall);
+}
+
+function simulateCall(requestPayload) {
+
+    var responseData = requestPayload.responseXML.documentElement.getAttribute("answer");
+    console.debug("SimulateCall Response Data :" + responseData);
+    var payloads = JSON.parse(responseData);
+    for (var i  =0 ;i < payloads.length ; i++) {
+		postXhr(payloads[i]);
+    }
+}
+
+function postXhr(payload) {
+
+    var url = '/api/sn_devops/v1/devops/tool/Orchestration?toolId=' + payload.taskExecution.toolId;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader("X-UserToken", g_ck);
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onreadystatechange = function() {
+        if (this.readyState === 4) {
+            if (this.status === 200 || this.status === 201) {
+                console.log("API call succeeded for pipeline simulation" + this.responseText)
+            } else {
+				g_form.addErrorMessage("Failed to post Event");
+                console.error('Simulation failed with error' + this.responseText);
+            }
+        }
+    };
+
+    xhr.send(JSON.stringify(payload));
+
+}]]></script>
+        <show_insert>false</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-04 16:48:43</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>555bb64e533b21103b58ddeeff7b12f6</sys_id>
+        <sys_mod_count>84</sys_mod_count>
+        <sys_name>Simulate</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name>sys_ui_action_555bb64e533b21103b58ddeeff7b12f6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-07 08:21:28</sys_updated_on>
+        <table>sn_devops_pipeline</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>false</ui16_compatible>
+    </sys_ui_action>
+</record_update>

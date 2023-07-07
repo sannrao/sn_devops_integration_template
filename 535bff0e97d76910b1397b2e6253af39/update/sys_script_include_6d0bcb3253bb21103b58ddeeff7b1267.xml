@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_sn_devops_in.DevOpsOrchestrationToolTemplateIntegrationHandler</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>Implements extension point sn_devops.DevOpsOrchestrationToolIntegrationHandler
+DevOpsOrchestrationToolIntegrationHandler - Endpoint Interface to determine right tool handler</description>
+        <name>DevOpsOrchestrationToolTemplateIntegrationHandler</name>
+        <script><![CDATA[var DevOpsOrchestrationToolTemplateIntegrationHandler = Class.create();
+DevOpsOrchestrationToolTemplateIntegrationHandler.prototype = {
+
+    /*
+    Validate if this is the right tool handler for a given tool name.
+    */
+    handleTool: function(toolName) {
+        return (toolName === 'x_snc_sn_devops_in_tool_template');
+    },
+
+	setLoggingContext: function(refTable, appContext, relatedRecord) {
+        this.refTable = refTable;
+        this.appContext = appContext;
+        this.relatedRecord = relatedRecord;
+        this._logger = new sn_devops.DevOpsLogger('DevOpsOrchestrationToolTemplateIntegrationHandler', this.refTable, this.appContext, this.relatedRecord);
+    },
+
+    /*
+    Handle the orchestration tool notification event
+    */
+    handleEvent: function() {
+        throw 'Implement handleEvent()';
+    },
+
+    /*
+    Get the native id for the orchestration task, from stepMapping or changeControl request payloads
+    */
+    getNativeIdForOrchestrationTask: function(payload) {
+        return payload.orchestrationTaskName;
+    },
+
+    /*
+    Get the native id for the orchestration task, from an orchestration tool notification event payload
+    */
+    getNativeIdForOrchestrationTaskFromEvent: function() {
+        throw 'Implement getNativeIdForOrchestrationTaskFromEvent()';
+    },
+
+    /*
+    Get the url for the orchestration task, from an orchestration tool notification event payload
+    */
+    getOrchestrationTaskUrl: function() {
+        throw 'Implement getOrchestrationTaskUrl()';
+    },
+
+    /*
+    Get the native id for the task execution, from an orchestration tool notification event payload
+    */
+    getNativeIdForTaskExecution: function() {
+        throw 'Implement getNativeIdForTaskExecution()';
+    },
+
+    /*
+    Get the url for the task execution, from an orchestration tool notification event payload
+    */
+    getTaskExecutionUrl: function() {
+        throw 'Implement getTaskExecutionUrl()';
+    },
+
+    /*
+    Implement what should be done in case the given orchestration task is not under change control
+    */
+    resumeJob: function() {
+        throw 'Implement resumeJob()';
+    },
+
+    /*
+    Implement the sending of the callback response to the orchestration tool
+    */
+    notifyWithCallback: function() {
+        throw 'Implement notifyWithCallback()';
+    },
+
+    /*
+    Get the body of the callback response to be sent to the orchestration tool
+    */
+    getNotifyBodyForOrchTool: function() {
+        throw 'Implement getNotifyBodyForOrchTool()';
+    },
+
+    /*
+    Get unique callback glide record
+    */
+    getCallBack: function() {
+        throw 'Implement getCallBack';
+    },
+
+    /*
+    Perform any transformations to the callback request originated from the orchestration tool
+    */
+    transformCallbackRequest: function() {
+        throw 'Implement transformCallbackRequest()';
+    },
+
+    /*
+    Implement what should be done to handle the reattempt of callback request when callback record already exists 
+    */
+    handleCallbackReattempt: function() {
+        throw 'Implement handleCallbackReattempt()';
+    },
+
+    /*
+    Return true if stage name includes job name
+    */
+    stageNameIncludesJobName: function() {
+        return false;
+    },
+
+    /*
+    Implement what should be done when there are multiple runs for task execution in a pipeline and you want to resolve 
+    the correct task execution of a particular run. Default returns the first execution found.
+	This method excepts glide record result after performing .next() on the respective query.
+    */
+    getTaskExecutionBasedOnAttempt: function(taskExecutionsGr, attempt) {
+        return taskExecutionsGr;
+    },
+
+    /*
+    Return true if change control should be enabled irrespective of the step configuration
+    taskDetails: A json object for details of the step and orchestration task in followinng format
+    {
+    	'orchestrationTaskDefinitionId' : '<task definition sys_id>'
+    }
+    */
+    isChangeControlEnabledByDefault: function(taskDetails) {
+        return false;
+    },
+
+    /* Returns an array of Json objects representing the pagination information
+     * for each page that shall be created for input import request
+     * e.g. [{startDate: '1-1-2021', endDate: '2-1-2021'}, {startDate: '3-1-2021', endDate: '4-1-2021'}]
+     */
+    getImportRequestPageDetails: function(importGr) {
+        return [];
+	},
+	
+    getParamsForAppContext: function(payload, capabilityName) {
+        return response;
+    },
+
+    type: 'DevOpsOrchestrationToolTemplateIntegrationHandler'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-07 01:51:09</sys_created_on>
+        <sys_id>6d0bcb3253bb21103b58ddeeff7b1267</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>DevOpsOrchestrationToolTemplateIntegrationHandler</sys_name>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name>sys_script_include_6d0bcb3253bb21103b58ddeeff7b1267</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-07 02:03:28</sys_updated_on>
+    </sys_script_include>
+</record_update>
