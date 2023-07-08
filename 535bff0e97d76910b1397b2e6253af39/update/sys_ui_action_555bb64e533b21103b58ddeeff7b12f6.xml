@@ -46,7 +46,7 @@ function simulateEvents() {
 function simulateCall(requestPayload) {
 
     var responseData = requestPayload.responseXML.documentElement.getAttribute("answer");
-    console.debug("SimulateCall Response Data :" + responseData);
+    console.debug("Simulate Call Response Data :" + responseData);
     var payloads = JSON.parse(responseData);
     for (var i  =0 ;i < payloads.length ; i++) {
 		postXhr(payloads[i]);
@@ -85,7 +85,7 @@ function postXhr(payload) {
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>555bb64e533b21103b58ddeeff7b12f6</sys_id>
-        <sys_mod_count>84</sys_mod_count>
+        <sys_mod_count>85</sys_mod_count>
         <sys_name>Simulate</sys_name>
         <sys_overrides/>
         <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
@@ -93,7 +93,7 @@ function postXhr(payload) {
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_update_name>sys_ui_action_555bb64e533b21103b58ddeeff7b12f6</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-07-07 08:21:28</sys_updated_on>
+        <sys_updated_on>2023-07-07 17:48:43</sys_updated_on>
         <table>sn_devops_pipeline</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>
