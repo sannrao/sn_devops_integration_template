@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description/>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_snc_sn_devops_in.simulationPayloads</name>
+        <read_roles/>
+        <suffix>simulation</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-10 10:29:12</sys_created_on>
+        <sys_id>88ddd400530471103b58ddeeff7b12f8</sys_id>
+        <sys_mod_count>5</sys_mod_count>
+        <sys_name>x_snc_sn_devops_in.simulationPayloads</sys_name>
+        <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
+        <sys_update_name>sys_properties_88ddd400530471103b58ddeeff7b12f8</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-11 02:13:39</sys_updated_on>
+        <type>string</type>
+        <value>{&#13;
+    "stages": [&#13;
+        {&#13;
+            "name": "build"&#13;
+        },&#13;
+        {&#13;
+            "name": "test",&#13;
+            "artifacts": [&#13;
+                {&#13;
+                    "name": "tool-artifact",&#13;
+                    "repositoryName": "env0-webapp",&#13;
+                    "version": "1.0.2"&#13;
+                }&#13;
+            ]&#13;
+        },&#13;
+        {&#13;
+            "name": "securityscan"&#13;
+        },&#13;
+        {&#13;
+            "name": "changeControl",&#13;
+            "changeControl": {&#13;
+                "message": "Tool Template created Change"&#13;
+            }&#13;
+        },&#13;
+        {&#13;
+            "name": "deploy"&#13;
+        }&#13;
+    ]&#13;
+}</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=88ddd400530471103b58ddeeff7b12f8"/>
+</record_update>

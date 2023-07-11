@@ -70,8 +70,8 @@ DevOpsOrchestrationToolTemplateIntegrationHandler.prototype = {
     /*
     Implement what should be done in case the given orchestration task is not under change control
     */
-    resumeJob: function() {
-        throw 'Implement resumeJob()';
+    resumeJob: function(payload, toolId, changeControl) {
+        return {};
     },
 
     /*
@@ -91,15 +91,18 @@ DevOpsOrchestrationToolTemplateIntegrationHandler.prototype = {
     /*
     Get unique callback glide record
     */
-    getCallBack: function() {
-        throw 'Implement getCallBack';
+    getCallBack: function(callbackGr, payload) {
+        if(callbackGr && callbackGr.hasNext()){
+			return callbackGr.next();
+		}
     },
 
     /*
     Perform any transformations to the callback request originated from the orchestration tool
     */
-    transformCallbackRequest: function() {
-        throw 'Implement transformCallbackRequest()';
+    transformCallbackRequest: function(payload, toolGr, pathParams, qParams) {        
+		gs.info("transformCallbackRequest : " + JSON.stringify(payload));
+        return payload;
     },
 
     /*
@@ -154,13 +157,13 @@ DevOpsOrchestrationToolTemplateIntegrationHandler.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-07-07 01:51:09</sys_created_on>
         <sys_id>6d0bcb3253bb21103b58ddeeff7b1267</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>10</sys_mod_count>
         <sys_name>DevOpsOrchestrationToolTemplateIntegrationHandler</sys_name>
         <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
         <sys_policy/>
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_update_name>sys_script_include_6d0bcb3253bb21103b58ddeeff7b1267</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-07-07 02:03:28</sys_updated_on>
+        <sys_updated_on>2023-07-10 05:00:11</sys_updated_on>
     </sys_script_include>
 </record_update>

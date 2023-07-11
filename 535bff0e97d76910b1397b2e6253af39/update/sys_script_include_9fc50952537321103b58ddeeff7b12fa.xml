@@ -11,18 +11,40 @@
 SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 
     stages: [{
-        "name": "build"
-    }, {
-        "name": "test"
-    }, {
-        "name": "securityscan"
-    }, {
-        "name": "changeControl"
-    }, {
-        "name": "deploy"
-    }],
+            "name": "build"
+        },
+        {
+            "name": "test",
+            "artifacts": [{
+                "name": "tool-artifact",
+                "repositoryName": "env0-webapp",
+                "semanticVersion": "1.0.2",
+                "version": "1.0.2"
+            }],
+            }, 
+            {
+                "name": "securityscan"
+        }, {
+            "name": "changeControl",
+            "changeControl": {
+                "message": "Tool Template created Change"
+            }
+            }, 
+            {
+                "name": "deploy"
+        }
+    ],
 
     pipelineInfo: {},
+    setStagesFromProperites: function(request, responseXML, gc) {
+        var simData = gs.getProperty("x_snc_sn_devops_in.simulationPayloads");
+		// gs.info("x_snc_sn_devops_in.SimulateDevOps simulation data from system properties" + simData );
+        if (!gs.nil(simData)) {
+            gs.info("x_snc_sn_devops_in.SimulateDevOps initializing simulation data from system properties");
+            var sim = JSON.parse(simData);
+            this.stages = sim.stages;
+        }
+    },
 
     getOrchestrationEventPayload: function() {
 
@@ -30,8 +52,9 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         var pipelineTableData = new global.GlideQuery("sn_devops_pipeline").get(pipelineSysId, ['name', 'tool.sys_id', 'pipeline_url', 'orch_pipeline']);
         this.pipelineInfo = pipelineTableData._value;
         this.pipelineInfo.buildNumber = gs.generateGUID();
+		this.setStagesFromProperites();
 
-		gs.info("SimulateDevOps pipelineInfo " + JSON.stringify(this.pipelineInfo));
+        gs.info("SimulateDevOps pipelineInfo " + JSON.stringify(this.pipelineInfo));
 
         var simulationData = [];
         for (var i in this.stages) {
@@ -46,8 +69,22 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         var simulationData = [];
         var startEvent = this.getOrchestrationStartEventPayload(pipelineInfo, stageNumber);
         simulationData.push(startEvent);
+
+        if (this.stages[stageNumber].changeControl) {
+            var changeControlSimulationData = this.getSimulationOfChangeControl(pipelineInfo, stageNumber);
+            simulationData.push(changeControlSimulationData);
+            //Change control needs to be stopped
+            return simulationData;
+        }
+
         var endEvent = this.getOrchestrationEndEventPayload(startEvent);
         simulationData.push(endEvent);
+
+        if (this.stages[stageNumber].artifacts) {
+            var artifactSimulationData = this.getSimulationOfArtifactData(pipelineInfo, stageNumber);
+            simulationData.push(artifactSimulationData);
+        }
+
         return simulationData;
 
     },
@@ -63,8 +100,8 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
     getOrchestrationEndEventPayload: function(startEvent) {
 
         var simulationData = JSON.parse(JSON.stringify(startEvent));
-        simulationData.taskExecution.result = 'successful';
-        simulationData.taskExecution.endDateTime = new GlideDateTime().getDisplayValue();
+        simulationData.payload.taskExecution.result = 'successful';
+        simulationData.payload.taskExecution.endDateTime = new GlideDateTime().getDisplayValue();
         return simulationData;
     },
 
@@ -72,32 +109,81 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 
         var dateTime = new GlideDateTime().getDisplayValue();
         var payloadTemplate = {
-            "taskExecution": {
-                "toolId": pipelineInfo.tool.sys_id,
-                "buildNumber": pipelineInfo.buildNumber,
-                "nativeId": pipelineInfo.buildNumber,
-                "name": this.stages[stageNumber].name + "#" + pipelineInfo.buildNumber,
-                "id": this.stages[stageNumber].name + "#" + pipelineInfo.buildNumber,
-                "url": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/#" + pipelineInfo.buildNumber,
-                "isMultiBranch": "false",
-                "branchName": "main",
-                "pipelineExecutionUrl": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/" + pipelineInfo.buildNumber,
-                "orchestrationTaskUrl": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/",
-                "orchestrationTaskName": pipelineInfo.orch_pipeline + "#" + this.stages[stageNumber].name,
-                "result": "building",
-                "startDateTime": dateTime,
-                "upstreamId": stageNumber >0 ? this.stages[stageNumber-1].name + "#" + pipelineInfo.buildNumber  : "",
-				"upstreamTaskUrl": stageNumber >0 ? pipelineInfo.pipeline_url + "/" + this.stages[stageNumber-1].name + "/#" + pipelineInfo.buildNumber : "",
-            },
-            "orchestrationTask": {
-                "orchestrationTaskURL": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/",
-                "orchestrationTaskName": pipelineInfo.orch_pipeline + "#" + this.stages[stageNumber].name,
-                "branchName": "main",
-                "toolId": pipelineInfo.tool.sys_id
+            "url": '/api/sn_devops/v1/devops/tool/Orchestration?toolId=' + pipelineInfo.tool.sys_id,
+            "payload": {
+                "taskExecution": {
+                    "toolId": pipelineInfo.tool.sys_id,
+                    "buildNumber": pipelineInfo.buildNumber,
+                    "nativeId": pipelineInfo.buildNumber,
+                    "name": this.stages[stageNumber].name + "#" + pipelineInfo.buildNumber,
+                    "id": this.stages[stageNumber].name + "#" + pipelineInfo.buildNumber,
+                    "url": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/#" + pipelineInfo.buildNumber,
+                    "isMultiBranch": "false",
+                    "branchName": "main",
+                    "pipelineExecutionUrl": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/" + pipelineInfo.buildNumber,
+                    "orchestrationTaskUrl": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/",
+                    "orchestrationTaskName": pipelineInfo.orch_pipeline + "#" + this.stages[stageNumber].name,
+                    "result": "building",
+                    "startDateTime": dateTime,
+                    "upstreamId": stageNumber > 0 ? this.stages[stageNumber - 1].name + "#" + pipelineInfo.buildNumber : "",
+                    "upstreamTaskUrl": stageNumber > 0 ? pipelineInfo.pipeline_url + "/" + this.stages[stageNumber - 1].name + "/#" + pipelineInfo.buildNumber : "",
+                },
+                "orchestrationTask": {
+                    "orchestrationTaskURL": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/",
+                    "orchestrationTaskName": pipelineInfo.orch_pipeline + "#" + this.stages[stageNumber].name,
+                    "branchName": "main",
+                    "toolId": pipelineInfo.tool.sys_id
+                }
             }
         };
 
         return payloadTemplate;
+    },
+
+    getSimulationOfArtifactData: function(pipelineInfo, stageNumber) {
+
+        var artifactPaylaodTemplate = {
+            "url": "api/sn_devops/devops/artifact/registration?orchestrationToolId=" + pipelineInfo.tool.sys_id,
+            "payload": {
+                "taskExecutionNumber": pipelineInfo.buildNumber,
+                "pipelineName": pipelineInfo.orch_pipeline,
+                "stageName": this.stages[stageNumber].name,
+                "artifacts": this.stages[stageNumber].artifacts
+            }
+        };
+		artifactPaylaodTemplate.payload.artifacts.forEach( function(artifact){
+			if(!gs.nil(artifact.semanticVersion)){
+				artifact.semanticVersion = artifact.semanticVersion+pipelineInfo.buildNumber;
+			}
+			artifact.version = artifact.version+pipelineInfo.buildNumber;
+		})
+
+        return artifactPaylaodTemplate;
+
+    },
+
+    getSimulationOfChangeControl: function(pipelineInfo, stageNumber) {
+        return {
+            "url": "api/sn_devops/devops/orchestration/changeControl?toolId=" + pipelineInfo.tool.sys_id,
+            "delay": 5000,
+            "payload": {
+                "toolId": pipelineInfo.tool.sys_id,
+                "callbackURL": "http://tool.example.com/restore/jenkins/" + pipelineInfo.buildNumber,
+                "orchestrationTaskURL": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/",
+                "orchestrationTaskName": pipelineInfo.orch_pipeline + "#" + this.stages[stageNumber].name,
+                "orchestrationTaskDetails": {
+                    "message": "task message",
+                    "triggerType": "user",
+                    "taskExecutionURL": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/#" + pipelineInfo.buildNumber,
+                    "orchestrationTaskURL": pipelineInfo.pipeline_url + "/" + this.stages[stageNumber].name + "/",
+                    "orchestrationTaskName": pipelineInfo.orch_pipeline + "#" + this.stages[stageNumber].name,
+                    "branchName": "main",
+                    "upstreamTaskExecutionURL": stageNumber > 0 ? pipelineInfo.pipeline_url + "/" + this.stages[stageNumber - 1].name + "/#" + pipelineInfo.buildNumber : "",
+                    "toolId": pipelineInfo.tool.sys_id,
+                }
+            }
+        };
+
     },
 
     type: 'SimulateDevOps'
@@ -106,13 +192,13 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-07-05 02:54:28</sys_created_on>
         <sys_id>9fc50952537321103b58ddeeff7b12fa</sys_id>
-        <sys_mod_count>64</sys_mod_count>
+        <sys_mod_count>98</sys_mod_count>
         <sys_name>SimulateDevOps</sys_name>
         <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_update_name>sys_script_include_9fc50952537321103b58ddeeff7b12fa</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-07-08 07:12:20</sys_updated_on>
+        <sys_updated_on>2023-07-11 02:14:23</sys_updated_on>
     </sys_script_include>
 </record_update>
