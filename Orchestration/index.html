@@ -517,14 +517,15 @@ See the existing flows for the right inputs and required responses</p>
 <ul>
 <li>response (String): in JSON format</li>
 </ul>
-<p>```js</p>
-<p>{   "status":true,
-    "statusCode":200,
-    "infoMsg":"Devops tool is connected.",
-    "errorMsg":"",
-    "aliasId":fd_data.subflow_inputs.aliasid
+<pre><code class="language-js">
+{   &quot;status&quot;:true,
+    &quot;statusCode&quot;:200,
+    &quot;infoMsg&quot;:&quot;Devops tool is connected.&quot;,
+    &quot;errorMsg&quot;:&quot;&quot;,
+    &quot;aliasId&quot;:fd_data.subflow_inputs.aliasid
 }
- ```   </p>
+
+</code></pre>
 <h3 id="discover">Discover</h3>
 <p>discoverPayload (String): in JSON Format array of pipelines</p>
 <pre><code class="language-js">
@@ -576,8 +577,7 @@ Subflow for Notification capability is not needed, if the payload maches the tra
 </code></pre>
 <h3 id="pipeline-stage-end-event">Pipeline Stage End Event</h3>
 <p>POST:  https://myinstance.service-now.com/api/sn_devops/v1/devops/tool/Orchestration?toolId= + pipelineInfo.tool.sys_id</p>
-<pre><code class="language-js">
-    {
+<pre><code class="language-js">    {
         &quot;taskExecution&quot;: {
             &quot;toolId&quot;: pipeline.tool.sys_id,
             &quot;buildNumber&quot;: pipeline.buildNumber,
