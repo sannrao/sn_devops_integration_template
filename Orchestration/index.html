@@ -517,13 +517,14 @@ See the existing flows for the right inputs and required responses</p>
 <ul>
 <li>response (String): in JSON format</li>
 </ul>
-<p><code>js
-{   "status":true,
+<p>```js</p>
+<p>{   "status":true,
     "statusCode":200,
     "infoMsg":"Devops tool is connected.",
     "errorMsg":"",
     "aliasId":fd_data.subflow_inputs.aliasid
-}</code>   </p>
+}
+ ```   </p>
 <h3 id="discover">Discover</h3>
 <p>discoverPayload (String): in JSON Format array of pipelines</p>
 <pre><code class="language-js">
@@ -545,7 +546,8 @@ Subflow for Notification capability is not needed, if the payload maches the tra
 <h2 id="payload-references-for-notification-events">Payload References for Notification Events</h2>
 <h3 id="pipeline-stage-start-event">Pipeline Stage Start Event</h3>
 <p>POST:  "https://myinstance.service-now.com/api/sn_devops/v1/devops/tool/Orchestration?toolId= + pipelineInfo.tool.sys_id"</p>
-<pre><code class="language-js">{
+<pre><code class="language-js">
+{
     &quot;taskExecution&quot;: {
         &quot;toolId&quot;: pipeline.tool.sys_id,
         &quot;buildNumber&quot;: pipeline.buildNumber,
@@ -574,7 +576,8 @@ Subflow for Notification capability is not needed, if the payload maches the tra
 </code></pre>
 <h3 id="pipeline-stage-end-event">Pipeline Stage End Event</h3>
 <p>POST:  https://myinstance.service-now.com/api/sn_devops/v1/devops/tool/Orchestration?toolId= + pipelineInfo.tool.sys_id</p>
-<pre><code class="language-js">    {
+<pre><code class="language-js">
+    {
         &quot;taskExecution&quot;: {
             &quot;toolId&quot;: pipeline.tool.sys_id,
             &quot;buildNumber&quot;: pipeline.buildNumber,
@@ -604,7 +607,8 @@ Subflow for Notification capability is not needed, if the payload maches the tra
 </code></pre>
 <h3 id="artifact-registration-for-pipeline-execution">Artifact Registration for pipeline execution</h3>
 <p>POST: "api/sn_devops/devops/artifact/registration?orchestrationToolId=" + pipelineInfo.tool.sys_id,</p>
-<pre><code class="language-js">{
+<pre><code class="language-js">
+{
     &quot;taskExecutionNumber&quot;: pipeline.buildNumber,
     &quot;pipelineName&quot;: pipeline.orch_pipeline,
     &quot;stageName&quot;: stage.name,
@@ -621,7 +625,8 @@ Subflow for Notification capability is not needed, if the payload maches the tra
 </code></pre>
 <h3 id="package-registration-for-a-pipeline-execution">Package Registration for a pipeline execution</h3>
 <p>POST: "api/sn_devops/devops/package/registration?orchestrationToolId="+ pipelineInfo.tool.sys_id,</p>
-<pre><code class="language-js">{
+<pre><code class="language-js">
+{
     &quot;name&quot;: &quot;tool-tempalte-package&quot;,
     &quot;pipelineName&quot;: pipelineInfo.orch_pipeline,
     &quot;stageName&quot;: stage.name,
@@ -646,7 +651,8 @@ Subflow for Notification capability is not needed, if the payload maches the tra
 </code></pre>
 <h3 id="change-control">Change Control</h3>
 <p>POST: "api/sn_devops/devops/orchestration/changeControl?toolId=" + pipeline.tool.sys_id,</p>
-<pre><code class="language-js">{
+<pre><code class="language-js">
+{
     &quot;toolId&quot;: pipeline.tool.sys_id,
     &quot;callbackURL&quot;: &quot;unique call back url&quot;,
     &quot;orchestrationTaskURL&quot;: pipeline.pipeline_url + &quot;/&quot; + stage.name + &quot;/&quot;,
