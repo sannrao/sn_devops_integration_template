@@ -35,6 +35,7 @@ Connect Subflow output :
 
 
  ```js
+
 {   "status":true,
     "statusCode":200,
     "infoMsg":"Devops tool is connected.",
@@ -77,6 +78,7 @@ Subflow for Notification capability is not needed, if the payload maches the tra
 POST:  "https://myinstance.service-now.com/api/sn_devops/v1/devops/tool/Orchestration?toolId= + pipelineInfo.tool.sys_id"
 
 ```js
+
 {
     "taskExecution": {
         "toolId": pipeline.tool.sys_id,
@@ -112,6 +114,7 @@ POST:  "https://myinstance.service-now.com/api/sn_devops/v1/devops/tool/Orchestr
 POST:  https://myinstance.service-now.com/api/sn_devops/v1/devops/tool/Orchestration?toolId= + pipelineInfo.tool.sys_id
 
 ```js
+
     {
         "taskExecution": {
             "toolId": pipeline.tool.sys_id,
@@ -146,6 +149,7 @@ POST:  https://myinstance.service-now.com/api/sn_devops/v1/devops/tool/Orchestra
 POST: "api/sn_devops/devops/artifact/registration?orchestrationToolId=" + pipelineInfo.tool.sys_id,
 
 ```js
+
 {
     "taskExecutionNumber": pipeline.buildNumber,
     "pipelineName": pipeline.orch_pipeline,
@@ -168,6 +172,7 @@ POST: "api/sn_devops/devops/artifact/registration?orchestrationToolId=" + pipeli
 POST: "api/sn_devops/devops/package/registration?orchestrationToolId="+ pipelineInfo.tool.sys_id,
 
 ```js    
+
 {
     "name": "tool-tempalte-package",
     "pipelineName": pipelineInfo.orch_pipeline,
@@ -197,6 +202,7 @@ POST: "api/sn_devops/devops/package/registration?orchestrationToolId="+ pipeline
 POST: "api/sn_devops/devops/orchestration/changeControl?toolId=" + pipeline.tool.sys_id,
 
 ```js
+
 {
     "toolId": pipeline.tool.sys_id,
     "callbackURL": "unique call back url",
