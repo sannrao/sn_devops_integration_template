@@ -77,15 +77,18 @@ DevOpsOrchestrationToolTemplateIntegrationHandler.prototype = {
     /*
     Implement the sending of the callback response to the orchestration tool
     */
-    notifyWithCallback: function() {
-        throw 'Implement notifyWithCallback()';
+    notifyWithCallback: function(grTool, endPoint, headers, data) {
+        var simData = new SimulateDevOps();
+        simData.restorePipelineExecution(grTool,endPoint);
+        
+        //throw 'Implement notifyWithCallback()';
     },
 
     /*
     Get the body of the callback response to be sent to the orchestration tool
     */
-    getNotifyBodyForOrchTool: function() {
-        throw 'Implement getNotifyBodyForOrchTool()';
+    getNotifyBodyForOrchTool: function(payload) {
+        return {};
     },
 
     /*
@@ -157,13 +160,13 @@ DevOpsOrchestrationToolTemplateIntegrationHandler.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-07-07 01:51:09</sys_created_on>
         <sys_id>6d0bcb3253bb21103b58ddeeff7b1267</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>DevOpsOrchestrationToolTemplateIntegrationHandler</sys_name>
         <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
         <sys_policy/>
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_update_name>sys_script_include_6d0bcb3253bb21103b58ddeeff7b1267</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-07-10 05:00:11</sys_updated_on>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-08-16 22:20:23</sys_updated_on>
     </sys_script_include>
 </record_update>

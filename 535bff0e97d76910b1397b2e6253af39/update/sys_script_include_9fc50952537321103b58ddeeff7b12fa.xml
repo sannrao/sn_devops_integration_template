@@ -11,34 +11,34 @@
 SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 
     stages: [{
-            "name": "build"
-        },
-        {
-            "name": "test",
-            "artifacts": [{
-                "name": "tool-artifact",
-                "repositoryName": "env0-webapp",
-                "semanticVersion": "1.0.2",
-                "version": "1.0.2"
-            }],
-        },
-        {
-            "name": "securityscan"
-        }, {
-            "name": "changeControl",
-            "changeControl": {
-                "message": "Tool Template created Change"
-            }
-        },
-        {
-            "name": "deploy"
+        "name": "build"
+    },
+    {
+        "name": "test",
+        "artifacts": [{
+            "name": "tool-artifact",
+            "repositoryName": "env0-webapp",
+            "semanticVersion": "1.0.2",
+            "version": "1.0.2"
+        }],
+    },
+    {
+        "name": "securityscan"
+    }, {
+        "name": "changeControl",
+        "changeControl": {
+            "message": "Tool Template created Change"
         }
+    },
+    {
+        "name": "deploy"
+    }
     ],
 
     pipelineInfo: {},
-    setStagesFromProperites: function(request, responseXML, gc) {
+    setStagesFromProperites: function (request, responseXML, gc) {
         var simData = gs.getProperty("x_snc_sn_devops_in.simulationPayloads");
-        // gs.info("x_snc_sn_devops_in.SimulateDevOps simulation data from system properties" + simData );
+
         if (!gs.nil(simData)) {
             gs.info("x_snc_sn_devops_in.SimulateDevOps initializing simulation data from system properties");
             var sim = JSON.parse(simData);
@@ -46,11 +46,15 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         }
     },
 
-    getOrchestrationEventPayload: function() {
+    _getPipelineInfo: function (pipelineSysId) {
+        var pipelineTableData = new global.GlideQuery("sn_devops_pipeline")
+            .get(pipelineSysId, ['name', 'tool.sys_id', 'pipeline_url', 'orch_pipeline']);
+        return pipelineTableData._value;
+    },
 
-        var pipelineSysId = this.getParameter("sysparm_pipeline_sys_id");
-        var pipelineTableData = new global.GlideQuery("sn_devops_pipeline").get(pipelineSysId, ['name', 'tool.sys_id', 'pipeline_url', 'orch_pipeline']);
-        this.pipelineInfo = pipelineTableData._value;
+    _getEventPayloadForPipeline: function (pipelineSysId) {
+
+        this.pipelineInfo = this._getPipelineInfo(pipelineSysId);
         this.pipelineInfo.buildNumber = gs.generateGUID();
         this.setStagesFromProperites();
 
@@ -58,48 +62,135 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 
         var simulationData = [];
         for (var i in this.stages) {
-            var simulationDataForStage = this.getOrchestrationEventPayloadForStage(this.pipelineInfo, i);
+            var simulationDataForStage = this._getOrchestrationEventPayloadForStage(this.pipelineInfo, i);
             simulationData = simulationData.concat(simulationDataForStage);
+            if (this.stages[i].changeControl) {
+                break;
+            }
         }
         return JSON.stringify(simulationData);
+    },
+
+    _getCallBackFromEndPoint: function (endPoint) {
+
+        var callBackInfo = new global.GlideQuery("sn_devops_callback")
+            .where("callback_url", endPoint)
+            .selectOne("step_execution.pipeline_execution.pipeline", "step_execution.task_execution.build_number")
+            .get();
+        return callBackInfo;
+    },
+
+    restorePipelineExecution: function (grTool, callBackUrl) {
+
+        var simData = this._getEventPayloadAfterChangeImplementation(callBackUrl);
+        var results = [];
+        for(var i in simData){
+            var result = this._postEvents(grTool,simData[i].url,simData[i].payload);
+            results.concat(result)
+        }
+        return result;
+    },
+
+    _postEvents: function (grTool, endPoint, payload) {
+        try {
+            var inputs = {};
+            inputs['grtool'] = grTool; // GlideRecord of table: sn_devops_tool 
+            inputs['endpoint'] = endPoint; // String 
+            inputs['inboundpayload'] = payload; // String 
+
+            // Start Asynchronously: Uncomment to run in background. Code snippet will not have access to outputs.
+            // sn_fd.FlowAPI.getRunner().action('x_snc_sn_devops_in.restorepipelineexecution').inBackground().withInputs(inputs).run();
+
+            // Execute Synchronously: Run in foreground. Code snippet has access to outputs.
+            var result = sn_fd.FlowAPI.getRunner().action('x_snc_sn_devops_in.restorepipelineexecution').inForeground().withInputs(inputs).run();
+            var outputs = result.getOutputs();
+
+            // Get Outputs:
+            // Note: outputs can only be retrieved when executing synchronously.
+            var result = outputs['result']; // JSON
+            return result;
+
+        } catch (ex) {
+            var message = ex.getMessage();
+            gs.error(message);
+        }
 
     },
 
-    getOrchestrationEventPayloadForStage: function(pipelineInfo, stageNumber) {
-        var simulationData = [];
-        var startEvent = this.getOrchestrationStartEventPayload(pipelineInfo, stageNumber);
-        simulationData.push(startEvent);
+    _getEventPayloadAfterChangeImplementation: function (callbackUrl) {
 
-        if (this.stages[stageNumber].changeControl) {
-            var changeControlSimulationData = this.getSimulationOfChangeControl(pipelineInfo, stageNumber);
-            simulationData.push(changeControlSimulationData);
-            //Change control needs to be stopped
-            return simulationData;
+        this.setStagesFromProperites();
+        var callBackInfo = this._getCallBackFromEndPoint(callbackUrl);
+        if (!callBackInfo) {
+            gs.info("no callBack entry found");
+            return {};
+        }
+        this.pipelineInfo = this._getPipelineInfo(callBackInfo.step_execution.pipeline_execution.pipeline);
+        this.pipelineInfo.buildNumber = callBackInfo.step_execution.task_execution.build_number;
+
+        var simulationData = []
+        // identify where the changeControl is enabled
+        for (var i in this.stages) {
+            if (this.stages[i].changeControl) {
+                i++;
+                break;
+            }
         }
 
-        var endEvent = this.getOrchestrationEndEventPayload(startEvent);
-        simulationData.push(endEvent);
+        for (; i < this.stages.length; i++) {
 
-        if (this.stages[stageNumber].artifacts) {
-            var artifactSimulationData = this.getSimulationOfArtifactData(pipelineInfo, stageNumber);
-            simulationData.push(artifactSimulationData);
-			var packageSimulationData = this.getSimulationOfPackageRegistration(pipelineInfo,stageNumber);
-			simulationData.push(packageSimulationData);
+            var simulationDataForStage = this._getOrchestrationEventPayloadForStage(this.pipelineInfo, i);
+            simulationData = simulationData.concat(simulationDataForStage);
+
         }
 
         return simulationData;
 
     },
 
-    getOrchestrationStartEventPayload: function(pipelineInfo, stageNumber) {
+    getOrchestrationEventPayload: function () {
+
+        var pipelineSysId = this.getParameter("sysparm_pipeline_sys_id");
+        return this._getEventPayloadForPipeline(pipelineSysId);
+
+
+    },
+
+    _getOrchestrationEventPayloadForStage: function (pipelineInfo, stageNumber) {
+        var simulationData = [];
+        var startEvent = this._getOrchestrationStartEventPayload(pipelineInfo, stageNumber);
+        simulationData.push(startEvent);
+
+        if (this.stages[stageNumber].changeControl) {
+            var changeControlSimulationData = this._getSimulationOfChangeControl(pipelineInfo, stageNumber);
+            simulationData.push(changeControlSimulationData);
+            return simulationData;
+        }
+
+        var endEvent = this._getOrchestrationEndEventPayload(startEvent);
+        simulationData.push(endEvent);
+
+        if (this.stages[stageNumber].artifacts) {
+            var artifactSimulationData = this._getSimulationOfArtifactData(pipelineInfo, stageNumber);
+            simulationData.push(artifactSimulationData);
+            var packageSimulationData = this._getSimulationOfPackageRegistration(pipelineInfo, stageNumber);
+            simulationData.push(packageSimulationData);
+        }
+
+
+        return simulationData;
+
+    },
+
+    _getOrchestrationStartEventPayload: function (pipelineInfo, stageNumber) {
 
         if (pipelineInfo) {
-            return this.getSimulationData(pipelineInfo, stageNumber);
+            return this._getSimulationData(pipelineInfo, stageNumber);
         }
         return {};
     },
 
-    getOrchestrationEndEventPayload: function(startEvent) {
+    _getOrchestrationEndEventPayload: function (startEvent) {
 
         var simulationData = JSON.parse(JSON.stringify(startEvent));
         simulationData.payload.taskExecution.result = 'successful';
@@ -107,7 +198,7 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         return simulationData;
     },
 
-    getSimulationData: function(pipelineInfo, stageNumber) {
+    _getSimulationData: function (pipelineInfo, stageNumber) {
 
         var dateTime = new GlideDateTime().getDisplayValue();
         var payloadTemplate = {
@@ -142,7 +233,7 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         return payloadTemplate;
     },
 
-    getSimulationOfArtifactData: function(pipelineInfo, stageNumber) {
+    _getSimulationOfArtifactData: function (pipelineInfo, stageNumber) {
 
         var artifactPaylaodTemplate = {
             "url": "api/sn_devops/devops/artifact/registration?orchestrationToolId=" + pipelineInfo.tool.sys_id,
@@ -153,7 +244,7 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
                 "artifacts": this.stages[stageNumber].artifacts
             }
         };
-        artifactPaylaodTemplate.payload.artifacts.forEach(function(artifact) {
+        artifactPaylaodTemplate.payload.artifacts.forEach(function (artifact) {
             if (!gs.nil(artifact.semanticVersion)) {
                 artifact.semanticVersion = artifact.semanticVersion + pipelineInfo.buildNumber;
             }
@@ -164,7 +255,7 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 
     },
 
-    getSimulationOfChangeControl: function(pipelineInfo, stageNumber) {
+    _getSimulationOfChangeControl: function (pipelineInfo, stageNumber) {
         return {
             "url": "api/sn_devops/devops/orchestration/changeControl?toolId=" + pipelineInfo.tool.sys_id,
             "delay": 5000,
@@ -187,10 +278,10 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         };
 
     },
-    getSimulationOfPackageRegistration: function(pipelineInfo, stageNumber) {
+    _getSimulationOfPackageRegistration: function (pipelineInfo, stageNumber) {
 
         var packageRegistration = {
-            "url": "api/sn_devops/devops/package/registration?orchestrationToolId="+ pipelineInfo.tool.sys_id,
+            "url": "api/sn_devops/devops/package/registration?orchestrationToolId=" + pipelineInfo.tool.sys_id,
             "payload": {
                 "name": "tool-tempalte-package",
                 "pipelineName": pipelineInfo.orch_pipeline,
@@ -206,17 +297,17 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
             }
         };
 
-		packageRegistration.payload.artifacts.forEach(function(artifact){
-			artifact.pipelineName = pipelineInfo.orch_pipeline;
-			artifact.stageName = packageRegistration.payload.stageName;
-			artifact.taskExecutionNumber = pipelineInfo.buildNumber ;
-			// if (!gs.nil(artifact.semanticVersion)) {
+        packageRegistration.payload.artifacts.forEach(function (artifact) {
+            artifact.pipelineName = pipelineInfo.orch_pipeline;
+            artifact.stageName = packageRegistration.payload.stageName;
+            artifact.taskExecutionNumber = pipelineInfo.buildNumber;
+            // if (!gs.nil(artifact.semanticVersion)) {
             //     artifact.semanticVersion = artifact.semanticVersion + pipelineInfo.buildNumber;
             // }
             // artifact.version = artifact.version + pipelineInfo.buildNumber;
-		});
-		
-		return packageRegistration;
+        });
+
+        return packageRegistration;
 
     },
 
@@ -226,13 +317,13 @@ SimulateDevOps.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-07-05 02:54:28</sys_created_on>
         <sys_id>9fc50952537321103b58ddeeff7b12fa</sys_id>
-        <sys_mod_count>103</sys_mod_count>
+        <sys_mod_count>155</sys_mod_count>
         <sys_name>SimulateDevOps</sys_name>
         <sys_package display_value="sn_devops_ints_template" source="x_snc_sn_devops_in">535bff0e97d76910b1397b2e6253af39</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="sn_devops_ints_template">535bff0e97d76910b1397b2e6253af39</sys_scope>
         <sys_update_name>sys_script_include_9fc50952537321103b58ddeeff7b12fa</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-07-11 09:50:19</sys_updated_on>
+        <sys_updated_by>santosh.nagaraja@snc</sys_updated_by>
+        <sys_updated_on>2023-08-16 22:19:52</sys_updated_on>
     </sys_script_include>
 </record_update>
